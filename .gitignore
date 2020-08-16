@@ -2,3 +2,7 @@ env/
 __pycache__/
 *.log
 *.env
+config.ini
+*.session
+.env
+.vscode/
