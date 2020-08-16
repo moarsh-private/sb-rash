@@ -12,8 +12,8 @@ async def cleaner(_: Client, m: Message):
     cid = m.chat.id 
     mid = int(m.message_id)
     replyed = m.reply_to_message
-    await m.delete()
     if text.startswith("!clean"):
+        await m.delete()
         num = text.replace("!clean","").strip()
         if len(num)>0 and not replyed:
             if not num.isnumeric():
