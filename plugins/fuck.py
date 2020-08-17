@@ -42,7 +42,7 @@ async def fuck(_: Client, m: Message):
         if not replyed:
             for i in range(10):
                 await m.edit(a)
-                await asyncio.sleep(0.3)
+                await asyncio.sleep(0.5)
                 await m.edit(b)
             await asyncio.sleep(2)
             await m.delete()
@@ -51,7 +51,7 @@ async def fuck(_: Client, m: Message):
             x = await m.reply(reply_to_message_id=replyed.message_id)
             for i in range(10):
                 await x.edit(a)
-                await asyncio.sleep(0.3)
+                await asyncio.sleep(0.5)
                 await x.edit(b)
             await asyncio.sleep(2)
             await x.delete()
