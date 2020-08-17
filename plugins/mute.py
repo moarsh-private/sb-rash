@@ -34,7 +34,9 @@ async def unmute(_: Client, m: Message):
     cid = m.chat.id 
     if text == "!unmute":
         if not replyed:
-            await m.edit("باید روی یک نفر ریپلای کنید")
+            mongo.USERS.update_one({"cid": cid}, {
+                "$set": {f"mute": "no"}}, upsert=True)
+            await m.edit(f"**Chat** `{cid}` **Unmuted**")
         else:
             mongo.USERS.update_one({"uid": replyed_id}, {
                 "$set": {f"{cid}-mute": "no"}}, upsert=True)
