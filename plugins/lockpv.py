@@ -7,7 +7,7 @@ ADMIN = int(getenv("ADMIN"))
 print(f"{ADMIN=}")
 
 
-@Client.on_message(Filters.user([ADMIN]))
+@Client.on_message(Filters.me)
 async def lock(_: Client, m: Message):
     text = m.text
     replyed = m.reply_to_message
@@ -29,7 +29,7 @@ async def lock(_: Client, m: Message):
         await m.continue_propagation()
 
 
-@Client.on_message(Filters.user([ADMIN]))
+@Client.on_message(Filters.me)
 async def unlock(_: Client, m: Message):
     text = m.text
     replyed = m.reply_to_message

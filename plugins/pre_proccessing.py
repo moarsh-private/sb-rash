@@ -9,9 +9,8 @@ ADMIN = getenv("ADMIN")
 async def pre_proccessing_pv(_: Client, m: Message):
     text = m.text
     uid = m.from_user.id
-    user = mongo.USERS.find_one({"uid":uid})
-    all_lock = mongo.ADMIN.find_one({"lockpv":"yes"})
-    
+    user = mongo.USERS.find_one({"uid":uid}) or {}
+    all_lock = mongo.ADMIN.find_one({"lockpv":"yes"})    
     if all_lock:
         await m.delete()
     else:
@@ -21,8 +20,8 @@ async def pre_proccessing_pv(_: Client, m: Message):
         await m.continue_propagation()
 
 @Client.on_message(Filters.group | Filters.channel)
-async def pre_proccessing_group_and_channel(_: Client, m: Message):
-    uid = m.from_user.id
+async def pre_proccessing_group_and_channel(_: Client, m: Message):    
+    uid = m.from_user.id if m.from_user else 123456
     cid = m.chat.id
     mute = mongo.USERS.find_one({'uid':uid,f"{cid}-mute":'yes'})    
     muteall = mongo.USERS.find_one({f"cid":cid,'mute':'yes'})    
@@ -42,7 +41,7 @@ async def pre_proccessing_admin(_: Client, m: Message):
     print(f"{mono_mode=}")
     print(f"{bold_mode=}")
     st = ""
-    
+
     if slow_mode and text != "!slowmode off":
         char = ""
         for i in text:
