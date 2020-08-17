@@ -17,7 +17,7 @@ async def slow_type(_: Client, m: Message):
             if char.strip() in ("", " ") or i.strip() in ("", " "):
                 continue
             await m.edit(char)
-            await asyncio.sleep(0.3)
+            await asyncio.sleep(0.2)
     elif text == "!slowmode on":
         mongo.ADMIN.update_one({"uid":ADMIN}, {
                                "$set": {"slowmode": "yes"}}, upsert=True)
