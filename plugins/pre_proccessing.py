@@ -26,7 +26,7 @@ async def pre_proccessing_group_and_channel(_: Client, m: Message):
     cid = m.chat.id
     mute = mongo.USERS.find_one({'uid':uid,f"{cid}-mute":'yes'})    
     muteall = mongo.USERS.find_one({f"cid":cid,'mute':'yes'})    
-    if mute or muteall:
+    if (mute or muteall) and uid != ADMIN:
         try:
             await m.delete()
         except: pass
