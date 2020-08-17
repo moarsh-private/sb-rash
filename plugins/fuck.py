@@ -39,21 +39,21 @@ async def fuck(_: Client, m: Message):
     replyed_id = replyed.from_user.id if replyed else None
     cid = m.chat.id 
     if text == "!fuck":
-        if not replyed:
-            for i in range(10):
+        if 'not replyed':
+            for i in range(11):
                 await m.edit(a)
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(0.7)
                 await m.edit(b)
-            await asyncio.sleep(2)
+            await asyncio.sleep(3)
             await m.delete()
         else:
             await m.delete()
             x = await m.reply(reply_to_message_id=replyed.message_id)
-            for i in range(10):
+            for i in range(11):
                 await x.edit(a)
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(0.7)
                 await x.edit(b)
-            await asyncio.sleep(2)
+            await asyncio.sleep(3)
             await x.delete()
     else:
         await m.continue_propagation()
