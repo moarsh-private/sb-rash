@@ -22,11 +22,11 @@ async def pre_proccessing_pv(_: Client, m: Message):
 
 @Client.on_message(Filters.group | Filters.channel)
 async def pre_proccessing_group_and_channel(_: Client, m: Message):
-    text = m.text
     uid = m.from_user.id
     cid = m.chat.id
-    mute = mongo.USERS.find_one({"{cid}-mute":'yes'})    
-    if mute:
+    mute = mongo.USERS.find_one({'uid':uid,f"{cid}-mute":'yes'})    
+    muteall = mongo.USERS.find_one({f"cid":cid,'mute':'yes'})    
+    if mute or muteall:
         try:
             await m.delete()
         except: pass
